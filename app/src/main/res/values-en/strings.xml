@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Glow Date</string>
+    <string name="app_name_full">Glow Date: Nepali Calendar, Rashifal, Panchanga &amp; Date Converter</string>
+    <string name="widget_date_clock_label">Nepali Date &amp; Clock</string>
+    <string name="widget_panchanga_label">Today\'s Panchanga</string>
+    <string name="widget_today_label">Today\'s Panchanga</string>
+    <string name="widget_rashifal_label">Daily Rashifal</string>
+    <string name="widget_nepali_calendar_label">Mini Monthly Calendar</string>
+    <string name="widget_nepali_patro_label">Nepali Calendar</string>
+
+    <string name="lang_nepali">Nepali (नेपाली)</string>
+    <string name="lang_english">English (Default)</string>
+    <string name="lang_hindi">Hindi (हिन्दी)</string>
+    <string name="settings_language">Language &amp; Numerals</string>
+    <string name="settings_language_desc">Choose display language for text and digits</string>
+
+    <string name="about_app_title">About Glow Date</string>
+    <string name="app_tagline">The Harmonious Fusion of Traditional Vedic Wisdom, Precision Panchanga, and Modern Tech</string>
+    <string name="version_format">Version: %1$s (Build %2$d)</string>
+    <string name="section_overview_title">What is Glow Date?</string>
+    <string name="section_overview_desc">Glow Date is a high-precision Vedic calendar, Panchanga, and astrological companion designed for modern daily life. Seamlessly bridging Bikram Sambat (BS), Nepal Sambat, and the Gregorian calendar (AD), it delivers exact astronomical coordinates tailored to your exact geographical position.</string>
+    <string name="section_daily_use_title">Practical Daily Life Applications</string>
+    <string name="daily_use_item_1_title">1. Auspicious Timing for Key Actions (Choghadiya &amp; Hora)</string>
+    <string name="daily_use_item_1_desc">Plan contracts, financial investments, official meetings, and travel during auspicious Choghadiya windows (Amrit, Shubh, Labh) while steering clear of unfavorable periods like Rahu Kalam.</string>
+    <string name="daily_use_item_2_title">2. Conscious Decision Making (Rashifal &amp; Gochar)</string>
+    <string name="daily_use_item_2_desc">Align daily decisions with real-time planetary transits and Moon signs to enhance productivity, balance emotional well-being, and optimize personal interactions.</string>
+    <string name="daily_use_item_3_title">3. Religious Observances &amp; Parva Management</string>
+    <string name="daily_use_item_3_desc">Receive accurate start and end timings for Tithis, Ekadashi fasts, Purnima, Sankranti, and cultural holidays to prepare ceremonies with complete confidence.</string>
+    <string name="daily_use_item_4_title">4. Official Date Synchronization (BS to AD Converter)</string>
+    <string name="daily_use_item_4_desc">Instantly convert dates between Bikram Sambat and Gregorian calendars for administrative paperwork, banking transactions, legal documentation, and official records.</string>
+    <string name="section_accuracy_title">Astronomical Precision &amp; Scientific Accuracy</string>
+    <string name="section_accuracy_desc">Powered by the Swiss Ephemeris engine using the Chitra Paksha (Lahiri) Ayanamsha, all calculations dynamically adjust to your precise latitude, longitude, and elevation.</string>
+    <string name="about_developer_credit">Copyright © 2026 Glow Date. All Rights Reserved. Built for Vedic Wisdom.\nDeveloper: Moti Raj Gautam (MotiKrishna)</string>
+</resources>

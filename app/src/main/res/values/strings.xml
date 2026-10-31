@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Glow Date</string>
+    <string name="app_name_full">Glow Date: Nepali Calendar, Rashifal, Panchanga &amp; Date Converter</string>
+    <string name="widget_date_clock_label">Nepali Date &amp; Clock (नेपाली मिति र समय)</string>
+    <string name="widget_panchanga_label">Today\'s Panchanga (आजको पञ्चाङ्ग)</string>
+    <string name="widget_today_label">Today\'s Panchanga (आजको पञ्चाङ्ग)</string>
+    <string name="widget_rashifal_label">Daily Rashifal (दैनिक राशिफल)</string>
+    <string name="widget_nepali_calendar_label">Mini Monthly Calendar (नेपाली क्यालेन्डर)</string>
+    <string name="widget_nepali_patro_label">Nepali Patro (नेपाली पात्रो)</string>
+
+    <string name="lang_nepali">नेपाली</string>
+    <string name="lang_english">English</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="settings_language">Language &amp; Numerals</string>
+    <string name="settings_language_desc">Choose display language for text and digits</string>
+
+    <string name="about_app_title">एपको बारेमा</string>
+    <string name="app_tagline">परम्परागत वैदिक ज्योतिष, शुद्ध पञ्चाङ्ग र आधुनिक प्रविधिको अनुपम संगम</string>
+    <string name="version_format">संस्करण: %1$s (बिल्ड %2$d)</string>
+    <string name="section_overview_title">ग्लो डेट (Glow Date) के हो?</string>
+    <string name="section_overview_desc">ग्लो डेट नेपाली जनजीवन, चाडपर्व, वैदिक ज्योतिष र आधुनिक समय व्यवस्थापनलाई एउटै सूत्रमा बाँध्ने आधिकारिक एवं प्रामाणिक डिजिटल पात्रो हो। यसले बिक्रम संवत्, नेपाल संवत् र ईस्वी सन् बीच निर्बाध रूपान्तरण उपलब्ध गराउनुका साथै प्रत्यक्ष सूर्योदय-सूर्यास्तमा आधारित सूक्ष्म पञ्चाङ्ग गणना प्रस्तुत गर्दछ।</string>
+    <string name="section_daily_use_title">दैनिक जीवनमा यसको व्यावहारिक उपयोगिता</string>
+    <string name="daily_use_item_1_title">१. शुभ कार्य तथा यात्राको साइत (चौघडिया र होरा)</string>
+    <string name="daily_use_item_1_desc">नयाँ व्यवसाय प्रारम्भ, बैंकिङ कारोबार, यात्रा, पूजाआजा वा सम्झौता गर्नु अघि अमृत, शुभ र लाभ चौघडिया हेरेर काम गर्दा कार्यसिद्धि हुने विश्वास गरिन्छ। यसले राहुकाल र यमघण्ट जस्ता अशुभ समयहरूबाट बच्न सतर्क गराउँछ।</string>
+    <string name="daily_use_item_2_title">२. दैनिक कार्ययोजना र निर्णय क्षमता (राशिफल)</string>
+    <string name="daily_use_item_2_desc">दैनिक ग्रहगोचर र चन्द्रमाको स्थितिमा आधारित राशिफलले तपाईंको दिनचर्या, आर्थिक लगानी, बोलीको प्रभाव र पारिवारिक सम्बन्धलाई सन्तुलित राख्न मद्दत गर्दछ।</string>
+    <string name="daily_use_item_3_title">३. चाडपर्व, व्रत तथा संस्कार व्यवस्थापन</string>
+    <string name="daily_use_item_3_desc">एकादशी, प्रदोष, संक्रान्ति, औँसी र पूर्णिमा लगायतका सम्पूर्ण सनातन तथा नेपाली राष्ट्रिय चाडपर्वहरूको शुद्ध तिथि र समय अग्रिम जानकारी पाइने हुँदा धार्मिक अनुष्ठानको पूर्वतयारी सहज हुन्छ।</string>
+    <string name="daily_use_item_4_title">४. प्रशासनिक तथा कानुनी मिति मिलान (Date Converter)</string>
+    <string name="daily_use_item_4_desc">सरकारी कामकाज, नागरिकता, जग्गा रजिस्ट्रेसन, शैक्षिक प्रमाणपत्र र बैंकमा आवश्यक पर्ने वि.सं. र ई.सं. (BS to AD) बीचको द्रुत तथा १००% त्रुटिरहित रूपान्तरण।</string>
+    <string name="section_accuracy_title">खगोलीय शुद्धता र प्रामाणिकता</string>
+    <string name="section_accuracy_desc">ग्लो डेटले स्विस एफेमेरिस (Swiss Ephemeris) र चित्रापक्ष (लाहिरी) अयनांशमा आधारित रहेर स्थानीय अक्षांश-देशान्तर अनुसार सूक्ष्म गणित गर्दछ, जसले गर्दा प्रत्येक स्थानको स्थानीय सूर्योदय, तिथि र ग्रहस्थिति पूर्ण रूपमा शुद्ध रहन्छ।</string>
+    <string name="about_developer_credit">सर्वाधिकार सुरक्षित © २०२६ Glow Date । सर्वाङ्गिण वैदिक मार्गदर्शन।\nDeveloper: Moti Raj Gautam (MotiKrishna)</string>
+</resources>

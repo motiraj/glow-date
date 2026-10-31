@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/widget_bs_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="२०८३ फागुन १२"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/widget_day_tithi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="आइतबार | कृष्ण सप्तमी"
+        android:textSize="15sp"
+        android:textColor="#FFE0B2"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:id="@+id/widget_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_badge"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="सार्वजनिक बिदा"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
+</LinearLayout>

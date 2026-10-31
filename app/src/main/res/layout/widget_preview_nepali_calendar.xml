@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_kundali_bg"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📅 असोज २०८३"
+            android:textColor="#F59E0B"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="◀   🏠   ▶"
+            android:textColor="#F97316"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:background="@drawable/widget_kundali_card"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="आइ   सो   मं   बु   बि   शु  शनि"
+        android:textColor="#94A3B8"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="  १    २    ३    ४    ५    ६    ७\n  ८    ९   १०   ११   १२   १३   १४\n १५   १६   १७   १८   १९  [२०]  २१\n २२   २३   २४   २५   २६   २७   २८"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="4dp" />
+</LinearLayout>

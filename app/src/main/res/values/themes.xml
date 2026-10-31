@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Native OS Android 12+ Splash Screen Theme -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FDFDFD</item>
+        <!-- Hides the default Android 12 icon so it doesn't clash with our custom Om Compose animation -->
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.BSADDateConverterAgeCalculator</item>
+    </style>
+
+    <!-- Base theme -->
+    <style name="Theme.BSADDateConverterAgeCalculator" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Make window background explicitly white immediately -->
+        <item name="android:windowBackground">#FDFDFD</item>
+        <item name="android:colorBackground">#FDFDFD</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

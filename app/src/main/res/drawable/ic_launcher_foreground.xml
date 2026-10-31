@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 1. Outer Solar Aura Rays -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54">
+        <path
+            android:fillColor="#F97316"
+            android:pathData="M54,20 L57,28 L64,22 L63,31 L71,28 L67,36 L76,36 L69,43 L78,46 L69,50 L78,54 L69,58 L76,65 L67,65 L71,73 L63,70 L64,79 L57,73 L54,81 L51,73 L44,79 L45,70 L37,73 L41,65 L32,65 L39,58 L30,54 L39,50 L30,46 L39,43 L32,36 L41,36 L37,28 L45,31 L44,22 L51,28 Z" />
+    </group>
+
+    <!-- 2. Glowing Golden Sun Ring -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M54,26 A28,28 0 1,0 54,82 A28,28 0 1,0 54,26 Z" />
+
+    <!-- 3. Calendar Body Base -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,34 H70 A6,6 0 0,1 76,40 V68 A6,6 0 0,1 70,74 H38 A6,6 0 0,1 32,68 V40 A6,6 0 0,1 38,34 Z" />
+
+    <!-- 4. Calendar Top Header Band -->
+    <path
+        android:fillColor="#F97316"
+        android:pathData="M38,34 H70 A6,6 0 0,1 76,40 V46 H32 V40 A6,6 0 0,1 38,34 Z" />
+
+    <!-- 5. Calendar Binder Pegs -->
+    <path
+        android:fillColor="#0D1323"
+        android:pathData="M42,31 A2,2 0 1,0 42,37 A2,2 0 1,0 42,31 Z M66,31 A2,2 0 1,0 66,37 A2,2 0 1,0 66,31 Z" />
+
+    <!-- 6. Central Star Emblem -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M54,50 L56.5,56.5 L63,59 L56.5,61.5 L54,68 L51.5,61.5 L45,59 L51.5,56.5 Z" />
+
+    <!-- Corner Dots -->
+    <path
+        android:fillColor="#0D1323"
+        android:pathData="M38,52 A1.5,1.5 0 1,0 38,55 A1.5,1.5 0 1,0 38,52 Z M70,52 A1.5,1.5 0 1,0 70,55 A1.5,1.5 0 1,0 70,52 Z M38,66 A1.5,1.5 0 1,0 38,69 A1.5,1.5 0 1,0 38,66 Z M70,66 A1.5,1.5 0 1,0 70,69 A1.5,1.5 0 1,0 70,66 Z" />
+
+</vector>
