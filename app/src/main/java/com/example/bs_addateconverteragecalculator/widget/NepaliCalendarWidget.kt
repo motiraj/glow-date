@@ -7,11 +7,13 @@ import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.LocalSize
 import androidx.glance.action.ActionParameters
 import androidx.glance.action.actionParametersOf
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
@@ -37,6 +39,7 @@ import androidx.glance.text.TextStyle
 import com.example.bs_addateconverteragecalculator.converter.DateConverterEngine
 import com.example.bs_addateconverteragecalculator.data.BsCalendarData
 import com.example.bs_addateconverteragecalculator.data.HolidayData
+import com.example.bs_addateconverteragecalculator.data.NepaliDate
 import com.example.bs_addateconverteragecalculator.data.NepaliMonths
 import com.example.bs_addateconverteragecalculator.data.NepaliNumerals
 import com.example.bs_addateconverteragecalculator.data.PreferencesManager
@@ -45,6 +48,7 @@ import java.time.LocalDate
 class NepaliCalendarWidget : GlanceAppWidget() {
 
     override val stateDefinition = PreferencesGlanceStateDefinition
+    override val sizeMode: SizeMode = SizeMode.Exact
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
@@ -58,6 +62,10 @@ class NepaliCalendarWidget : GlanceAppWidget() {
 
     @Composable
     fun NepaliCalendarWidgetContent(context: Context, monthOffset: Int) {
+        val widgetSize = LocalSize.current
+        val isCompactHeight = widgetSize.height < 170.dp
+        val isNarrowWidth = widgetSize.width < 240.dp
+
         val todayAd = LocalDate.now()
         val todayBs = try {
             DateConverterEngine.convertAdToBs(todayAd)
@@ -66,7 +74,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
         }
 
         val baseYear = todayBs?.year ?: 2083
-        val baseMonth = todayBs?.month ?: 6
+        val baseMonth = todayBs?.month ?: 1
         val todayBsDay = todayBs?.day ?: 1
 
         // Compute displayed year and month based on interactive monthOffset
@@ -87,7 +95,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
         
         // Find starting day of week for 1st of target BS month
         val firstAdDate = try {
-            DateConverterEngine.convertBsToAd(com.example.bs_addateconverteragecalculator.data.NepaliDate(targetYear, targetMonth, 1))
+            DateConverterEngine.convertBsToAd(NepaliDate(targetYear, targetMonth, 1))
         } catch (_: Exception) {
             todayAd
         }
@@ -100,7 +108,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                 .fillMaxSize()
                 .background(KundaliWidgetTheme.DeepCosmicNavy)
                 .cornerRadius(18.dp)
-                .padding(10.dp)
+                .padding(if (isCompactHeight) 6.dp else 10.dp)
         ) {
             Column(
                 modifier = GlanceModifier.fillMaxSize(),
@@ -114,8 +122,8 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                     Text(
                         text = "📅 $monthNe $yearNe",
                         style = TextStyle(
-                            color = KundaliWidgetTheme.SolarAmber,
-                            fontSize = 13.sp,
+                            color = KundaliWidgetTheme.SolarGold,
+                            fontSize = if (isNarrowWidth) 12.sp else 14.sp,
                             fontWeight = FontWeight.Bold
                         )
                     )
@@ -128,9 +136,9 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                     ) {
                         Box(
                             modifier = GlanceModifier
-                                .background(KundaliWidgetTheme.MidnightSlate)
+                                .background(KundaliWidgetTheme.SurfaceCard)
                                 .cornerRadius(8.dp)
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                                .padding(horizontal = 7.dp, vertical = 3.dp)
                                 .clickable(
                                     actionRunCallback<ChangeCalendarMonthActionCallback>(
                                         actionParametersOf(ChangeCalendarMonthActionCallback.MONTH_DELTA_KEY to -1)
@@ -141,7 +149,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                             Text(
                                 text = "◀",
                                 style = TextStyle(
-                                    color = KundaliWidgetTheme.SolarOrange,
+                                    color = KundaliWidgetTheme.SolarAmber,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -153,9 +161,9 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                         if (monthOffset != 0) {
                             Box(
                                 modifier = GlanceModifier
-                                    .background(KundaliWidgetTheme.MidnightSlate)
+                                    .background(KundaliWidgetTheme.AmberBadge)
                                     .cornerRadius(8.dp)
-                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                                    .padding(horizontal = 7.dp, vertical = 3.dp)
                                     .clickable(
                                         actionRunCallback<ChangeCalendarMonthActionCallback>(
                                             actionParametersOf(ChangeCalendarMonthActionCallback.MONTH_DELTA_KEY to 0)
@@ -164,10 +172,11 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "🏠",
+                                    text = "आज",
                                     style = TextStyle(
                                         color = KundaliWidgetTheme.SolarAmber,
-                                        fontSize = 10.sp
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold
                                     )
                                 )
                             }
@@ -176,9 +185,9 @@ class NepaliCalendarWidget : GlanceAppWidget() {
 
                         Box(
                             modifier = GlanceModifier
-                                .background(KundaliWidgetTheme.MidnightSlate)
+                                .background(KundaliWidgetTheme.SurfaceCard)
                                 .cornerRadius(8.dp)
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                                .padding(horizontal = 7.dp, vertical = 3.dp)
                                 .clickable(
                                     actionRunCallback<ChangeCalendarMonthActionCallback>(
                                         actionParametersOf(ChangeCalendarMonthActionCallback.MONTH_DELTA_KEY to 1)
@@ -189,7 +198,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                             Text(
                                 text = "▶",
                                 style = TextStyle(
-                                    color = KundaliWidgetTheme.SolarOrange,
+                                    color = KundaliWidgetTheme.SolarAmber,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -198,7 +207,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                     }
                 }
 
-                Spacer(modifier = GlanceModifier.height(6.dp))
+                Spacer(modifier = GlanceModifier.height(if (isCompactHeight) 4.dp else 6.dp))
 
                 // Days of Week Header (7 columns: Sun..Sat, Saturday in Muted Red)
                 val headers = listOf("आइ", "सो", "मं", "बु", "बि", "शु", "शनि")
@@ -212,7 +221,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                             text = h,
                             style = TextStyle(
                                 color = if (isSaturday) KundaliWidgetTheme.MutedRed else KundaliWidgetTheme.SlateSilver,
-                                fontSize = 10.sp,
+                                fontSize = if (isCompactHeight) 9.sp else 10.sp,
                                 fontWeight = FontWeight.Bold
                             ),
                             modifier = GlanceModifier.defaultWeight()
@@ -220,7 +229,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                     }
                 }
 
-                Spacer(modifier = GlanceModifier.height(4.dp))
+                Spacer(modifier = GlanceModifier.height(if (isCompactHeight) 2.dp else 4.dp))
 
                 // 7x6 Calendar Month Day Grid
                 val gridCells = mutableListOf<Int?>()
@@ -229,6 +238,9 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                 while (gridCells.size % 7 != 0) { gridCells.add(null) }
 
                 val weeks = gridCells.chunked(7)
+                val dayFontSize = if (isCompactHeight) 10.sp else 11.sp
+                val cellCornerRad = if (isCompactHeight) 4.dp else 6.dp
+                val cellPad = if (isCompactHeight) 0.5.dp else 1.dp
 
                 Column(
                     modifier = GlanceModifier
@@ -254,14 +266,14 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                                         modifier = GlanceModifier
                                             .defaultWeight()
                                             .fillMaxHeight()
-                                            .padding(1.dp)
+                                            .padding(cellPad)
                                             .background(
                                                 if (isToday) 
-                                                    KundaliWidgetTheme.SolarAmber 
+                                                    KundaliWidgetTheme.SolarGold
                                                 else 
                                                     KundaliWidgetTheme.MidnightSlate
                                             )
-                                            .cornerRadius(6.dp),
+                                            .cornerRadius(cellCornerRad),
                                         contentAlignment = Alignment.Center
                                     ) {
                                         Text(
@@ -272,7 +284,7 @@ class NepaliCalendarWidget : GlanceAppWidget() {
                                                     isHoliday -> KundaliWidgetTheme.MutedRed
                                                     else -> KundaliWidgetTheme.CrispWhite
                                                 },
-                                                fontSize = 11.sp,
+                                                fontSize = dayFontSize,
                                                 fontWeight = if (isToday || isHoliday) FontWeight.Bold else FontWeight.Medium
                                             )
                                         )

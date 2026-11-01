@@ -87,6 +87,7 @@ class MainActivity : ComponentActivity() {
 
             // 2. Schedule all notification alarms and background workers
             NotificationHelper.scheduleDailyNotification(appCtx)
+            NotificationHelper.scheduleMidnightUpdateAlarm(appCtx)
             NotificationScheduler.scheduleDailyVedicNotification(appCtx)
             VedicTimingNotificationScheduler.scheduleDailyTimingAlarms(appCtx)
             FestivalNotificationHelper.scheduleFestivalAlarms(appCtx)
@@ -96,8 +97,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Synchronize all home screen widgets with current app running date, time, and user-selected Rashi
+        // Synchronize all home screen and keyguard widgets and lock screen date notification
         NepaliDateClockReceiver.updateAllWidgets(applicationContext)
+        NotificationHelper.updatePersistentDateNotification(applicationContext)
     }
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)

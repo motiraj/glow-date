@@ -7,10 +7,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.LocalSize
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.AndroidRemoteViews
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.background
@@ -40,6 +42,8 @@ import java.time.LocalDate
 
 class PanchangaWidget : GlanceAppWidget() {
 
+    override val sizeMode: SizeMode = SizeMode.Exact
+
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
             androidx.glance.GlanceTheme {
@@ -50,6 +54,9 @@ class PanchangaWidget : GlanceAppWidget() {
 
     @Composable
     fun PanchangaWidgetContent(context: Context) {
+        val widgetSize = LocalSize.current
+        val isCompact = widgetSize.width < 265.dp || widgetSize.height < 115.dp
+
         val todayAd = LocalDate.now()
         val currentBsYearApprox = todayAd.year + 57
         val todayBs = try {
@@ -104,14 +111,14 @@ class PanchangaWidget : GlanceAppWidget() {
                 .fillMaxSize()
                 .background(KundaliWidgetTheme.DeepCosmicNavy)
                 .cornerRadius(18.dp)
-                .padding(10.dp)
+                .padding(if (isCompact) 8.dp else 10.dp)
                 .clickable(deepLinkAction)
         ) {
             Column(
                 modifier = GlanceModifier.fillMaxSize(),
                 verticalAlignment = Alignment.Top
             ) {
-                // Header Row: Title & Location Pin
+                // Header Row
                 Row(
                     modifier = GlanceModifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -121,12 +128,12 @@ class PanchangaWidget : GlanceAppWidget() {
                             text = "🌞 आजको पञ्चाङ्ग",
                             style = TextStyle(
                                 color = KundaliWidgetTheme.SolarOrange,
-                                fontSize = 13.sp,
+                                fontSize = if (isCompact) 12.sp else 13.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         )
                         Text(
-                            text = "📍 काठमाडौँ • $monthNe $dayNe, $yearNe ($dayOfWeekNe)",
+                            text = "$monthNe $dayNe, $yearNe ($dayOfWeekNe)",
                             style = TextStyle(
                                 color = KundaliWidgetTheme.SlateSilver,
                                 fontSize = 10.sp
@@ -135,47 +142,24 @@ class PanchangaWidget : GlanceAppWidget() {
                     }
 
                     // Native Live Clock
-                    AndroidRemoteViews(
-                        remoteViews = RemoteViews(context.packageName, R.layout.widget_text_clock_kundali)
-                    )
-                }
-
-                Spacer(modifier = GlanceModifier.height(8.dp))
-
-                // 2-Column Grid of 5 Angas
-                Row(
-                    modifier = GlanceModifier
-                        .fillMaxWidth()
-                        .defaultWeight(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Left Column: Tithi & Nakshatra
-                    Column(
+                    Box(
                         modifier = GlanceModifier
-                            .defaultWeight()
-                            .fillMaxHeight(),
-                        verticalAlignment = Alignment.CenterVertically
+                            .background(KundaliWidgetTheme.SurfaceCard)
+                            .cornerRadius(8.dp)
+                            .padding(horizontal = 4.dp, vertical = 2.dp)
                     ) {
-                        PanchangaAngaCard(
-                            label = "तिथि (Tithi)",
-                            value = tithiShort,
-                            modifier = GlanceModifier.fillMaxWidth().defaultWeight()
-                        )
-                        Spacer(modifier = GlanceModifier.height(6.dp))
-                        PanchangaAngaCard(
-                            label = "नक्षत्र (Nakshatra)",
-                            value = nakshatraName,
-                            modifier = GlanceModifier.fillMaxWidth().defaultWeight()
+                        AndroidRemoteViews(
+                            remoteViews = RemoteViews(context.packageName, R.layout.widget_text_clock_kundali)
                         )
                     }
+                }
 
-                    Spacer(modifier = GlanceModifier.width(6.dp))
+                Spacer(modifier = GlanceModifier.height(if (isCompact) 6.dp else 8.dp))
 
-                    // Right Column: Yoga, Karana & Sunrise/Sunset
+                if (isCompact) {
+                    // Compact 2-Row Layout (Tithi/Nakshatra on top, Sun on bottom)
                     Column(
-                        modifier = GlanceModifier
-                            .defaultWeight()
-                            .fillMaxHeight(),
+                        modifier = GlanceModifier.fillMaxWidth().defaultWeight(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
@@ -183,23 +167,84 @@ class PanchangaWidget : GlanceAppWidget() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             PanchangaAngaCard(
-                                label = "योग (Yoga)",
-                                value = yogaName,
+                                label = "तिथि (Tithi)",
+                                value = tithiShort,
                                 modifier = GlanceModifier.defaultWeight().fillMaxHeight()
                             )
-                            Spacer(modifier = GlanceModifier.width(4.dp))
+                            Spacer(modifier = GlanceModifier.width(6.dp))
                             PanchangaAngaCard(
-                                label = "करण (Karana)",
-                                value = karanaName,
+                                label = "नक्षत्र (Nakshatra)",
+                                value = nakshatraName,
                                 modifier = GlanceModifier.defaultWeight().fillMaxHeight()
                             )
                         }
-                        Spacer(modifier = GlanceModifier.height(6.dp))
+                        Spacer(modifier = GlanceModifier.height(4.dp))
                         PanchangaAngaCard(
                             label = "सूर्योदय / सूर्यास्त",
-                            value = "🌅 $sunriseStr / 🌇 $sunsetStr",
+                            value = "🌅 $sunriseStr  |  🌇 $sunsetStr",
                             modifier = GlanceModifier.fillMaxWidth().defaultWeight()
                         )
+                    }
+                } else {
+                    // Standard / Expanded 2-Column Grid of 5 Angas
+                    Row(
+                        modifier = GlanceModifier
+                            .fillMaxWidth()
+                            .defaultWeight(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Left Column: Tithi & Nakshatra
+                        Column(
+                            modifier = GlanceModifier
+                                .defaultWeight()
+                                .fillMaxHeight(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            PanchangaAngaCard(
+                                label = "तिथि (Tithi)",
+                                value = tithiShort,
+                                modifier = GlanceModifier.fillMaxWidth().defaultWeight()
+                            )
+                            Spacer(modifier = GlanceModifier.height(6.dp))
+                            PanchangaAngaCard(
+                                label = "नक्षत्र (Nakshatra)",
+                                value = nakshatraName,
+                                modifier = GlanceModifier.fillMaxWidth().defaultWeight()
+                            )
+                        }
+
+                        Spacer(modifier = GlanceModifier.width(6.dp))
+
+                        // Right Column: Yoga, Karana & Sunrise/Sunset
+                        Column(
+                            modifier = GlanceModifier
+                                .defaultWeight()
+                                .fillMaxHeight(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                modifier = GlanceModifier.fillMaxWidth().defaultWeight(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                PanchangaAngaCard(
+                                    label = "योग",
+                                    value = yogaName,
+                                    modifier = GlanceModifier.defaultWeight().fillMaxHeight()
+                                )
+                                Spacer(modifier = GlanceModifier.width(4.dp))
+                                PanchangaAngaCard(
+                                    label = "करण",
+                                    value = karanaName,
+                                    modifier = GlanceModifier.defaultWeight().fillMaxHeight()
+                                )
+                            }
+                            Spacer(modifier = GlanceModifier.height(6.dp))
+                            PanchangaAngaCard(
+                                label = "सूर्योदय / सूर्यास्त",
+                                value = "🌅 $sunriseStr / 🌇 $sunsetStr",
+                                modifier = GlanceModifier.fillMaxWidth().defaultWeight()
+                            )
+                        }
                     }
                 }
             }
@@ -216,16 +261,16 @@ class PanchangaWidget : GlanceAppWidget() {
             modifier = modifier
                 .background(KundaliWidgetTheme.MidnightSlate)
                 .cornerRadius(10.dp)
-                .padding(6.dp),
+                .padding(horizontal = 8.dp, vertical = 5.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             Column {
                 Text(
                     text = label,
                     style = TextStyle(
-                        color = KundaliWidgetTheme.SlateSilver,
+                        color = KundaliWidgetTheme.SolarAmber,
                         fontSize = 9.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     )
                 )
                 Spacer(modifier = GlanceModifier.height(2.dp))

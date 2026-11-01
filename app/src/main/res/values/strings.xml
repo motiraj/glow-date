@@ -2,10 +2,14 @@
     <string name="app_name">Glow Date</string>
     <string name="app_name_full">Glow Date: Nepali Calendar, Rashifal, Panchanga &amp; Date Converter</string>
     <string name="widget_date_clock_label">Nepali Date &amp; Clock (नेपाली मिति र समय)</string>
+    <string name="widget_date_clock_desc">नेपाली मिति, बार, तिथि, नेपाल संवत् र लाइभ घडी हेर्नुहोस्</string>
     <string name="widget_panchanga_label">Today\'s Panchanga (आजको पञ्चाङ्ग)</string>
+    <string name="widget_panchanga_desc">दैनिक पञ्चाङ्गका ५ अङ्गहरू: तिथि, नक्षत्र, योग, करण र सूर्योदय</string>
     <string name="widget_today_label">Today\'s Panchanga (आजको पञ्चाङ्ग)</string>
     <string name="widget_rashifal_label">Daily Rashifal (दैनिक राशिफल)</string>
+    <string name="widget_rashifal_desc">१२ राशिको दैनिक भविष्यवाणी, शुभ रंग, अंक र फल</string>
     <string name="widget_nepali_calendar_label">Mini Monthly Calendar (नेपाली क्यालेन्डर)</string>
+    <string name="widget_nepali_calendar_desc">मासिक नेपाली क्यालेन्डर, महिना परिवर्तन र सार्वजनिक बिदा</string>
     <string name="widget_nepali_patro_label">Nepali Patro (नेपाली पात्रो)</string>
 
     <string name="lang_nepali">नेपाली</string>

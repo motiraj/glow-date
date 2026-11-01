@@ -2,10 +2,14 @@
     <string name="app_name">ग्लोडेट</string>
     <string name="app_name_full">ग्लोडेट: नेपाली पात्रो, राशिफल, पञ्चाङ्ग तथा मिति रूपान्तरण</string>
     <string name="widget_date_clock_label">नेपाली मिति र समय (Nepali Date &amp; Clock)</string>
+    <string name="widget_date_clock_desc">नेपाली मिति, बार, तिथि, नेपाल संवत् र लाइभ घडी हेर्नुहोस्</string>
     <string name="widget_panchanga_label">आजको पञ्चाङ्ग (Today\'s Panchanga)</string>
+    <string name="widget_panchanga_desc">दैनिक पञ्चाङ्गका ५ अङ्गहरू: तिथि, नक्षत्र, योग, करण र सूर्योदय</string>
     <string name="widget_today_label">आजको पञ्चाङ्ग (Today\'s Panchanga)</string>
     <string name="widget_rashifal_label">दैनिक राशिफल (Daily Rashifal)</string>
+    <string name="widget_rashifal_desc">१२ राशिको दैनिक भविष्यवाणी, शुभ रंग र अंक</string>
     <string name="widget_nepali_calendar_label">नेपाली क्यालेन्डर (Mini Calendar)</string>
+    <string name="widget_nepali_calendar_desc">मासिक नेपाली क्यालेन्डर, महिना परिवर्तन र सार्वजनिक बिदा</string>
     <string name="widget_nepali_patro_label">नेपाली पात्रो (Nepali Patro)</string>
 
     <string name="lang_nepali">नेपाली (पूर्वनिर्धारित)</string>

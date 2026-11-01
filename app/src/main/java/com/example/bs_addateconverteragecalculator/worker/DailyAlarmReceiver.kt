@@ -24,14 +24,18 @@ class DailyAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val pendingResult = goAsync()
 
-        // 1. Reschedule for tomorrow 5:00 AM
+        // 1. Reschedule for tomorrow 5:00 AM & guarantee midnight alarm is scheduled
         NotificationHelper.scheduleDailyNotification(context)
+        NotificationHelper.scheduleMidnightUpdateAlarm(context)
         FestivalNotificationHelper.scheduleFestivalAlarms(context)
 
-        // 2. Update Home Screen Glance Widgets automatically
+        // 2. Update Home Screen & Keyguard Glance Widgets automatically
         NepaliDateClockReceiver.updateAllWidgets(context)
 
-        // 3. Check for Festival & Parva notifications
+        // 3. Update persistent lock screen & status bar date notification
+        NotificationHelper.updatePersistentDateNotification(context)
+
+        // 4. Check for Festival & Parva notifications
         FestivalNotificationHelper.checkAndNotifyFestival(context)
 
         // 3. Post random/contextual notification for Panchanga, Rashifal, or Barvela & Hora

@@ -7,10 +7,12 @@ import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.LocalSize
 import androidx.glance.action.ActionParameters
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
@@ -41,6 +43,7 @@ import java.time.LocalDate
 class RashifalWidget : GlanceAppWidget() {
 
     override val stateDefinition = PreferencesGlanceStateDefinition
+    override val sizeMode: SizeMode = SizeMode.Exact
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
@@ -54,6 +57,10 @@ class RashifalWidget : GlanceAppWidget() {
 
     @Composable
     fun RashifalWidgetContent(context: Context, zodiacId: String) {
+        val widgetSize = LocalSize.current
+        val isNarrow = widgetSize.width < 260.dp
+        val isCompactHeight = widgetSize.height < 115.dp
+
         val todayAd = LocalDate.now()
         val sign = try {
             RashifalData.signs.find { it.id == zodiacId } ?: RashifalData.signs[0]
@@ -61,7 +68,7 @@ class RashifalWidget : GlanceAppWidget() {
             RashifalData.signs[0]
         }
         val basePrediction = try { RashifalData.getPrediction(sign.id) } catch (_: Exception) { RashifalData.getPrediction("aries") }
-        val dailyPredictionText = try { RealTimeRashifalGenerator.generateDailyPrediction(sign.id, todayAd) } catch (_: Exception) { "आज दिन राम्रो रहनेछ।" }
+        val dailyPredictionText = try { RealTimeRashifalGenerator.generateDailyPrediction(sign.id, todayAd) } catch (_: Exception) { "आज दिन शुभ रहनेछ।" }
 
         val deepLinkAction = KundaliWidgetTheme.getDeepLinkAction(context, "rashifal")
 
@@ -70,7 +77,7 @@ class RashifalWidget : GlanceAppWidget() {
                 .fillMaxSize()
                 .background(KundaliWidgetTheme.DeepCosmicNavy)
                 .cornerRadius(18.dp)
-                .padding(10.dp)
+                .padding(if (isCompactHeight) 8.dp else 10.dp)
         ) {
             Column(
                 modifier = GlanceModifier.fillMaxSize(),
@@ -85,7 +92,7 @@ class RashifalWidget : GlanceAppWidget() {
                         text = "⭐ दैनिक राशिफल",
                         style = TextStyle(
                             color = KundaliWidgetTheme.SolarOrange,
-                            fontSize = 13.sp,
+                            fontSize = if (isNarrow) 12.sp else 13.sp,
                             fontWeight = FontWeight.Bold
                         )
                     )
@@ -94,14 +101,14 @@ class RashifalWidget : GlanceAppWidget() {
                     // Interactive Button to Cycle Zodiac Sign
                     Box(
                         modifier = GlanceModifier
-                            .background(KundaliWidgetTheme.MidnightSlate)
-                            .cornerRadius(12.dp)
-                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                            .background(KundaliWidgetTheme.SurfaceCard)
+                            .cornerRadius(10.dp)
+                            .padding(horizontal = 8.dp, vertical = 3.dp)
                             .clickable(actionRunCallback<CycleZodiacActionCallback>()),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "🔄 अर्को राशि",
+                            text = if (isNarrow) "🔄 राशि" else "🔄 अर्को राशि",
                             style = TextStyle(
                                 color = KundaliWidgetTheme.SolarAmber,
                                 fontSize = 10.sp,
@@ -111,7 +118,7 @@ class RashifalWidget : GlanceAppWidget() {
                     }
                 }
 
-                Spacer(modifier = GlanceModifier.height(8.dp))
+                Spacer(modifier = GlanceModifier.height(if (isCompactHeight) 4.dp else 6.dp))
 
                 // Main Content Card (Clickable to deep link into Rashifal tab)
                 Row(
@@ -122,21 +129,24 @@ class RashifalWidget : GlanceAppWidget() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Left Box: Zodiac Symbol & Solar Aura Badge
+                    val badgeWidth = if (isNarrow) 62.dp else 80.dp
+                    val symbolSize = if (isNarrow) 24.sp else 30.sp
+
                     Column(
                         modifier = GlanceModifier
-                            .width(85.dp)
+                            .width(badgeWidth)
                             .fillMaxHeight()
                             .background(KundaliWidgetTheme.MidnightSlate)
                             .cornerRadius(12.dp)
-                            .padding(6.dp),
+                            .padding(4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = sign.symbol,
                             style = TextStyle(
-                                color = KundaliWidgetTheme.SolarAmber,
-                                fontSize = 32.sp,
+                                color = KundaliWidgetTheme.SolarGold,
+                                fontSize = symbolSize,
                                 fontWeight = FontWeight.Bold
                             )
                         )
@@ -145,54 +155,56 @@ class RashifalWidget : GlanceAppWidget() {
                             text = sign.nameNepali,
                             style = TextStyle(
                                 color = KundaliWidgetTheme.CrispWhite,
-                                fontSize = 12.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         )
-                        Text(
-                            text = "(${sign.nameEnglish})",
-                            style = TextStyle(
-                                color = KundaliWidgetTheme.SlateSilver,
-                                fontSize = 9.sp
+                        if (!isNarrow) {
+                            Text(
+                                text = "(${sign.nameEnglish})",
+                                style = TextStyle(
+                                    color = KundaliWidgetTheme.SlateSilver,
+                                    fontSize = 8.sp
+                                )
                             )
-                        )
+                        }
                     }
 
-                    Spacer(modifier = GlanceModifier.width(8.dp))
+                    Spacer(modifier = GlanceModifier.width(6.dp))
 
-                    // Right Box: Short Prediction Text
+                    // Right Box: Prediction Text
                     Box(
                         modifier = GlanceModifier
                             .defaultWeight()
                             .fillMaxHeight()
                             .background(KundaliWidgetTheme.MidnightSlate)
                             .cornerRadius(12.dp)
-                            .padding(10.dp),
+                            .padding(horizontal = 8.dp, vertical = 6.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Column {
                             Text(
-                                text = "${sign.nameNepali} — आजको भविष्यवाणी",
+                                text = "${sign.nameNepali} — आजको फल",
                                 style = TextStyle(
                                     color = KundaliWidgetTheme.SolarAmber,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                             )
-                            Spacer(modifier = GlanceModifier.height(4.dp))
+                            Spacer(modifier = GlanceModifier.height(2.dp))
                             Text(
                                 text = dailyPredictionText,
                                 style = TextStyle(
                                     color = KundaliWidgetTheme.CrispWhite,
-                                    fontSize = 11.sp
+                                    fontSize = if (isCompactHeight) 10.sp else 11.sp
                                 ),
-                                maxLines = 3
+                                maxLines = if (isCompactHeight) 2 else 3
                             )
                         }
                     }
                 }
 
-                Spacer(modifier = GlanceModifier.height(8.dp))
+                Spacer(modifier = GlanceModifier.height(if (isCompactHeight) 4.dp else 6.dp))
 
                 // Footer: Astrological Highlights (Lucky Color & Lucky Number)
                 Row(
@@ -202,7 +214,7 @@ class RashifalWidget : GlanceAppWidget() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "🎨 शुभ रंग: ${basePrediction.luckyColor} | 🔢 शुभ अंक: ${basePrediction.luckyNumber}",
+                        text = "🎨 ${basePrediction.luckyColor}  |  🔢 ${basePrediction.luckyNumber}",
                         style = TextStyle(
                             color = KundaliWidgetTheme.SlateSilver,
                             fontSize = 10.sp,

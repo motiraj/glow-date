@@ -2,10 +2,14 @@
     <string name="app_name">Glow Date</string>
     <string name="app_name_full">Glow Date: Nepali Calendar, Rashifal, Panchanga &amp; Date Converter</string>
     <string name="widget_date_clock_label">Nepali Date &amp; Clock</string>
+    <string name="widget_date_clock_desc">Nepali date, weekday, tithi, Nepal Sambat &amp; live clock</string>
     <string name="widget_panchanga_label">Today\'s Panchanga</string>
+    <string name="widget_panchanga_desc">5 angas of Panchanga: Tithi, Nakshatra, Yoga, Karana &amp; Sunrise</string>
     <string name="widget_today_label">Today\'s Panchanga</string>
     <string name="widget_rashifal_label">Daily Rashifal</string>
+    <string name="widget_rashifal_desc">Daily horoscope for 12 zodiac signs with lucky color and number</string>
     <string name="widget_nepali_calendar_label">Mini Monthly Calendar</string>
+    <string name="widget_nepali_calendar_desc">Monthly Nepali calendar with month navigation and holidays</string>
     <string name="widget_nepali_patro_label">Nepali Calendar</string>
 
     <string name="lang_nepali">Nepali (नेपाली)</string>
