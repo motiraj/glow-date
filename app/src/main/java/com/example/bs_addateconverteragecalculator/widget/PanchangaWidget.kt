@@ -59,12 +59,11 @@ class PanchangaWidget : GlanceAppWidget() {
 
         val todayAd = LocalDate.now()
         val currentBsYearApprox = todayAd.year + 57
-        val todayBs = try {
+        val activeBs = try {
             DateConverterEngine.convertAdToBs(todayAd)
         } catch (_: Exception) {
             com.example.bs_addateconverteragecalculator.data.NepaliDate(currentBsYearApprox, 1, 1)
         }
-        val activeBs = todayBs ?: com.example.bs_addateconverteragecalculator.data.NepaliDate(currentBsYearApprox, 1, 1)
 
         val monthNe = try { NepaliMonths.getMonthName(activeBs.month, true) } catch (_: Exception) { "वैशाख" }
         val dayNe = try { NepaliNumerals.toNepaliDigits(activeBs.day) } catch (_: Exception) { "१" }
@@ -76,7 +75,7 @@ class PanchangaWidget : GlanceAppWidget() {
         val tz = 5.75
 
         // 5 ANGAS OF PANCHANGA
-        val tithiShort = try { if (todayBs != null) TithiCalculator.getShortTithi(todayBs.year, todayBs.month, todayBs.day) else "शुक्ल नवमी" } catch (_: Exception) { "शुक्ल नवमी" }
+        val tithiShort = try { TithiCalculator.getShortTithi(activeBs.year, activeBs.month, activeBs.day) } catch (_: Exception) { "शुक्ल नवमी" }
         
         val nakshatraName = try {
             val nVal = NakshatraYogaCalculator.getNakshatraValue(todayAd, 6.0, tz)

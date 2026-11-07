@@ -48,8 +48,8 @@ class DailyVedicNotificationWorker(
             val yearNe = NepaliNumerals.toNepaliDigits(todayBs.year)
             val dayOfWeekNe = NepaliDays.getDayName(todayAd.dayOfWeek.value % 7, true)
 
-            val tithi = if (todayBs != null) TithiCalculator.getShortTithi(todayBs.year, todayBs.month, todayBs.day) else "शुक्ल पक्ष"
-            val holiday = if (todayBs != null) HolidayData.getHoliday(todayBs.year, todayBs.month, todayBs.day) else null
+            val tithi = try { TithiCalculator.getShortTithi(todayBs.year, todayBs.month, todayBs.day) } catch (_: Exception) { "शुक्ल पक्ष" }
+            val holiday = try { HolidayData.getHoliday(todayBs.year, todayBs.month, todayBs.day) } catch (_: Exception) { null }
             
             val lat = 27.7172
             val lon = 85.3240

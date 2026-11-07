@@ -57,6 +57,7 @@ object LocationHelper {
                     var locationName = "Current Device Location"
                     try {
                         val geocoder = Geocoder(context, Locale.getDefault())
+                        @Suppress("DEPRECATION")
                         val addresses = geocoder.getFromLocation(lat, lon, 1)
                         if (!addresses.isNullOrEmpty()) {
                             val address = addresses[0]

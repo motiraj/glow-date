@@ -11,8 +11,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -164,7 +164,7 @@ fun CalendarScreen(
                             }
                             viewModel.updateMonth(newYear, newMonth)
                         }) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = "अघिल्लो महिना", tint = MaterialTheme.colorScheme.primary)
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "अघिल्लो महिना", tint = MaterialTheme.colorScheme.primary)
                         }
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -223,7 +223,7 @@ fun CalendarScreen(
                             }
                             viewModel.updateMonth(newYear, newMonth)
                         }) {
-                            Icon(Icons.Default.ArrowForward, contentDescription = "अर्को महिना", tint = MaterialTheme.colorScheme.primary)
+                            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "अर्को महिना", tint = MaterialTheme.colorScheme.primary)
                         }
                     }
 

@@ -75,12 +75,11 @@ class NepaliDateClockWidget : GlanceAppWidget() {
 
         val todayAd = LocalDate.now()
         val currentBsYearApprox = todayAd.year + 57
-        val todayBs = try {
+        val activeBs = try {
             DateConverterEngine.convertAdToBs(todayAd)
         } catch (_: Exception) {
             NepaliDate(currentBsYearApprox, 1, 1)
         }
-        val activeBs = todayBs ?: NepaliDate(currentBsYearApprox, 1, 1)
 
         val monthNe = try { NepaliMonths.getMonthName(activeBs.month, true) } catch (_: Exception) { "वैशाख" }
         val dayNe = try { NepaliNumerals.toNepaliDigits(activeBs.day) } catch (_: Exception) { "१" }
