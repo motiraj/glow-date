@@ -8,6 +8,7 @@
 # Keep Glance App Widgets
 -keep class androidx.glance.** { *; }
 -keepclassmembers class * extends androidx.glance.** { *; }
+-keep class * implements androidx.glance.appwidget.action.ActionCallback { public <init>(); }
 -dontwarn androidx.glance.**
 
 # Keep WorkManager & Workers
